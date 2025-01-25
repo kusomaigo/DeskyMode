@@ -1,0 +1,16 @@
+{
+  "name": "ksmg.vrcft.deskymode",
+  "displayName": "DeskyMode",
+  "version": "0.3.0",
+  "description": "Utility script and Assets to generate head-driven avatar motion for VRChat",
+  "url": "https://github.com/kusomaigo/DeskyMode",
+  "author": {
+    "name": "ksmg"
+  },
+  "gitDependencies": {},
+  "vpmDependencies": {},
+  "hideInEditor": false,
+  "localPath": ".\\Packages\\ksmg.vrcft.deskymode",
+  "license": "MIT",
+  "unity": "2022.3"
+}
