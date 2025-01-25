@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
+  m_Name: DeskyMode Menu
+  m_EditorClassIdentifier: 
+  Parameters: {fileID: 11400000, guid: d64d02c29b89e924384a009018f94a02, type: 2}
+  controls:
+  - name: Desky Mode
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: desktop_tracking
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Rotation Only
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: rot_only
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Rotation Only UpperBody Emph
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: rot_only_upperbody
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Rotation Only Hand Lock (Static Poses)
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: rot_only_handlock
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Visualize Debug
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: debug_vis
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Autotoggle
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: desky_autotoggle
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
