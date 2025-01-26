@@ -39,11 +39,20 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
 
 ## TODO
 
- - Massive code refactor because it's a mess
- - Workaround the import compliation issue
- - Better window UI 
- - Add settings for control of certain FIK properties
-    - Spine stiffness
-    - Difference "presets" 
-    - ...
+ - [ ] Massive code refactor because it's a mess
+ - [ ] Workaround the import compliation issue
+ - [ ] Better window UI 
+ - [ ] Add settings for control of certain FIK properties
+    - [ ] Spine stiffness
+    - [ ] Difference "presets" 
+    - [ ] ...
+  
+## License
 
+**All of the source assets and all generated assets from DeskyMode fall under the [MIT License](https://github.com/regzo2/OSCmooth/blob/master/LICENSE)**.
+
+## Credits
+
+- Video avatar credit: [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
+- Azmidi's [OSCmooth](https://github.com/regzo2/OSCmooth)
+- [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for adding desktop headtracking
