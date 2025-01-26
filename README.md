@@ -5,6 +5,13 @@ Unity tool to generate components for head-source, IK-driven avatar motion in de
 
 https://github.com/user-attachments/assets/9f5cdbd7-b6ab-40de-b037-7ba2bef53d89
 
+<details>
+<summary>Stream Usage Example</summary>
+<br>
+   
+[<img src="imgs/tita_stream_clip_preview.jpg">](https://www.twitch.tv/titatitanium/clip/TardyBadPresidentSeemsGood-5QwNH2gC7TGvcA63)
+</details>
+
 Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)](https://github.com/benaclejames/VRCFaceTracking/pull/248)
 
 ## Setup Instructions
@@ -40,7 +47,7 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
 ## TODO
 
  - [ ] Massive code refactor because it's a mess
- - [ ] Workaround the import compliation issue
+ - [ ] Workaround the import compilation issue
  - [ ] Better window UI 
  - [ ] Add settings for control of certain FIK properties
     - [ ] Spine stiffness
@@ -49,10 +56,11 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
   
 ## License
 
-**All of the source assets and all generated assets from DeskyMode fall under the [MIT License](https://github.com/regzo2/OSCmooth/blob/master/LICENSE)**.
+**All of the source assets and all generated assets from DeskyMode fall under the [MIT License](https://github.com/kusomaigo/DeskyMode/blob/main/LICENSE)**.
 
 ## Credits
 
-- Video avatar credit: [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
+- Avatar video credit: [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
+- [Titatitanium](https://www.twitch.tv/titatitanium) for streaming with early versions
 - Azmidi's [OSCmooth](https://github.com/regzo2/OSCmooth)
-- [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for adding desktop headtracking
+- [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for desktop headtracking to be added to VRCFT
