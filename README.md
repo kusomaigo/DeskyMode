@@ -3,6 +3,10 @@
 VTube in VRChat: 
 Unity tool to generate components for head-source, IK-driven avatar motion in desktop VRChat 
 
+https://github.com/user-attachments/assets/9f5cdbd7-b6ab-40de-b037-7ba2bef53d89
+
+Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)](https://github.com/benaclejames/VRCFaceTracking/pull/248)
+
 ## Setup Instructions
 
 0. Make sure your VRC Avatar Project is up to date 
