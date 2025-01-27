@@ -1,0 +1,389 @@
+using System;
+using UnityEditor;
+using UnityEngine;
+using VRC.SDK3.Avatars.Components;
+
+namespace DeskyMode
+{
+    public class DeskyModeEditor : EditorWindow
+    {
+        // internals
+        private VRCAvatarDescriptor _avDescriptor;
+        private DeskyModeSetup _dms;
+        private Material _debugMat;
+        private UnityEngine.Object _controllerPrefab;
+
+        // additional scalar to DeskyMode root for changing *animation* scale
+        private float _avatarHeightScale;
+
+        // editor window internals
+        private bool _showDebug;
+        private bool _showTargets;
+        private bool _showDmsReferences;
+        private bool _showDmsReferencesSpine;
+
+        // editor window options
+        private bool _useAddMeshRenderers;
+
+        // default assets
+        private string defaultControllerPrefabGUID = "1cef90d72d53d5a499aeae93b016bcef";
+        private string defaultDebugMatGUID = "f3e52f38b6c8a3148b8c6689429ce669";
+
+        [MenuItem("Tools/DeskyMode/DeskyMode Window")]
+        private static void Init()
+        {
+            var window = GetWindowWithRect<DeskyModeEditor>(new Rect(0, 0, 512, 512));
+            window.titleContent = new GUIContent("DeskyMode");
+            window.maxSize = new Vector2(512, 1024);
+            window.minSize = new Vector2(512, 512);
+            window.Show();
+        }
+
+        // initialize Editor window components
+        void OnEnable()
+        {
+            _controllerPrefab = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(AssetDatabase.GUIDToAssetPath(defaultControllerPrefabGUID));
+            _debugMat = AssetDatabase.LoadAssetAtPath<Material>(AssetDatabase.GUIDToAssetPath(defaultDebugMatGUID));
+            _avatarHeightScale = 0f;
+
+            OnNewAvatar();
+        }
+
+        void OnNewAvatar()
+        {
+            _dms = new DeskyModeSetup();
+            _dms.debugMat = _debugMat;
+
+            // shouldn't be a thing for regular users I think? 
+            if (_avDescriptor != null)
+            {
+                bool validAvatar = _dms.Initialize(_avDescriptor, ref _avatarHeightScale);
+                if (validAvatar)
+                {
+                    _dms.AutoPopulateReferences();
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Avatar Error", "Your avatar is not properly set up as humanoid", "Cancel");
+                    _avDescriptor = null;
+                    // clear out 
+                    _dms = new DeskyModeSetup();
+                    _avatarHeightScale = 0f;
+                }
+            }
+        }
+
+        private void OnGUI()
+        {
+            GUIStyle style = new GUIStyle(GUI.skin.label);
+            style.wordWrap = true;
+
+            #region avatardescriptor
+            
+            EditorGUI.BeginChangeCheck();
+
+            EditorGUILayout.LabelField("VRC Avatar to apply DeskyMode to", style);
+            _avDescriptor = (VRCAvatarDescriptor)EditorGUILayout.ObjectField
+            (
+                new GUIContent
+                (
+                    "Avatar",
+                    "The Avatar must be Unity humanoid"
+                ),
+                _avDescriptor,
+                typeof(VRCAvatarDescriptor),
+                true
+            );
+
+            // End the code block and update the label if a change occurred
+            // Note: This indicates user interaction with the slider but does not guarantee that a SerializedProperty has changed.
+            // To have the updated value, call serializedObject.ApplyModifiedProperties().
+            if (EditorGUI.EndChangeCheck())
+            {
+                OnNewAvatar();
+            }
+
+            GUILayout.Space(10);
+            #endregion
+
+            #region user settings?
+            //EditorGUILayout.LabelField("Avatar Scale (set automatically)", style);
+            EditorGUI.BeginChangeCheck();
+
+            _avatarHeightScale = (float)EditorGUILayout.FloatField
+            (
+                new GUIContent
+                (
+                    "Avatar Scale",
+                    "Set automatically from avatar when generating targets. Change manually if perceived motion is not accurate to scale"
+                ),
+                _avatarHeightScale
+            );
+            if (EditorGUI.EndChangeCheck())
+            {
+                // inefficient :shrug: 
+                OnNewAvatar();
+            }
+
+
+            GUILayout.Space(10);
+            #endregion
+
+            #region debug 
+            if (_showDebug)
+            {
+                _showTargets = EditorGUILayout.Foldout(_showTargets, "IK Targets");
+                if (_showTargets)
+                {
+                    // targets
+                    EditorGUI.indentLevel++;
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "head position target",
+                            "head position target"
+                        ),
+                        _dms.headPosTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "head aim target",
+                            "head aim target"
+                        ),
+                        _dms.headAimTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "head aim pole target",
+                            "head aim pole target"
+                        ),
+                        _dms.headAimPoleTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "left hand target",
+                            "left hand target"
+                        ),
+                        _dms.leftHandTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "right hand target",
+                            "right hand target"
+                        ),
+                        _dms.rightHandTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "left arm bend target",
+                            "left arm bend target"
+                        ),
+                        _dms.leftArmBendTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    _ = (Transform)EditorGUILayout.ObjectField
+                    (
+                        new GUIContent
+                        (
+                            "right arm bend target",
+                            "right arm bend target"
+                        ),
+                        _dms.rightArmBendTarget,
+                        typeof(Transform),
+                        true
+                    );
+
+                    EditorGUI.indentLevel--;
+                }
+                GUILayout.Space(10);
+
+                _showDmsReferences = EditorGUILayout.Foldout(_showDmsReferences, "Avatar References");
+                if (_showDmsReferences)
+                {
+                    EditorGUI.indentLevel++;
+
+                    _ = (Transform)EditorGUILayout.ObjectField("root", _dms.references.root, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("hips", _dms.references.pelvis, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftUpperLeg", _dms.references.leftThigh, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftLowerleg", _dms.references.leftCalf, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftFoot", _dms.references.leftFoot, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightUpperLeg", _dms.references.rightThigh, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightLowerLeg", _dms.references.rightCalf, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightFoot", _dms.references.rightFoot, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftUpperArm", _dms.references.leftUpperArm, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftLowerArm", _dms.references.leftForearm, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("leftHand", _dms.references.leftHand, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightUpperArm", _dms.references.rightUpperArm, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightLowerArm", _dms.references.rightForearm, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("rightHand", _dms.references.rightHand, typeof(Transform), true);
+                    _ = (Transform)EditorGUILayout.ObjectField("head", _dms.references.head, typeof(Transform), true);
+
+                    _showDmsReferencesSpine = EditorGUILayout.Foldout(_showDmsReferencesSpine, "Spine Chain");
+                    if (_showDmsReferencesSpine)
+                    {
+                        EditorGUI.indentLevel++;
+                        if (_dms.references.spine.Length == 4)
+                        {
+                            EditorGUILayout.LabelField("Avatar without UpperChest bone", style);
+                        } else if (_dms.references.spine.Length == 5)
+                        {
+                            EditorGUILayout.LabelField("Avatar with UpperChest bone", style);
+                        }
+                        for (int i = 0; i < _dms.references.spine.Length; i++)
+                        {
+                            _ = (Transform)EditorGUILayout.ObjectField(String.Concat("spine", i), _dms.references.spine[i], typeof(Transform), true);
+
+                        }
+                        EditorGUI.indentLevel--;
+                    }
+
+                    EditorGUI.indentLevel--;
+                }
+                GUILayout.Space(10);
+            }
+
+            _showDebug = GUILayout.Toggle(_showDebug, "Debug");
+
+            #endregion debug
+
+            #region debug mat
+
+            _useAddMeshRenderers = GUILayout.Toggle(_useAddMeshRenderers, "Add Mesh Renderers for debugging IK targets in-game");
+            EditorGUI.BeginChangeCheck();
+            _debugMat = (Material)EditorGUILayout.ObjectField(
+                new GUIContent
+                (
+                    "Debug Shape material",
+                    "if you don't like transparent red for some reason"
+                ),
+                _debugMat,
+                typeof(Material),
+                true
+            );
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (_debugMat != null) { 
+                    _dms.debugMat = _debugMat;
+                }
+            }
+
+            #endregion
+
+            if (GUILayout.Button("Generate IK Targets"))
+            {
+                try
+                {
+                    OnNewAvatar();
+                    _dms.GenerateIKTargets(_useAddMeshRenderers);
+                    EditorUtility.DisplayDialog("Complete", "good job you", "OK");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    EditorUtility.DisplayDialog("Error", "Review console", "OK");
+                }
+
+            }
+
+            if (GUILayout.Button("Generate IK Components (Standard)"))
+            {
+                try
+                {
+                    _dms.CreateHeadFullBodyBipedIK();
+                    _dms.CreateAimIKs();
+                    //_dms.CreateHandsFullBodyBipedIK();
+                    _dms.CreateHandsLimbIKs();
+                    _dms.CreateStandardIKExecutionOrders();
+                    //_dms.standardIKSet.gameObject.SetActive(false);
+                    EditorUtility.DisplayDialog("Complete", "good job you", "OK");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    EditorUtility.DisplayDialog("Error", "Review console", "OK");
+                }
+
+            }
+
+            _controllerPrefab = (UnityEngine.Object)EditorGUILayout.ObjectField(
+               new GUIContent
+               (
+                   "Controller Prefab",
+                   "I'm lazy don't mess with this"
+               ),
+               _controllerPrefab,
+               typeof(UnityEngine.Object),
+               true
+            );
+            if (GUILayout.Button("Add VRCFury Prefab"))
+            {
+                try
+                {
+                    _dms.AddVRCPrefab(_controllerPrefab);
+                    EditorUtility.DisplayDialog("Complete", "good job you", "OK");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    EditorUtility.DisplayDialog("Error", "Review console", "OK");
+                }
+
+            }
+
+            GUILayout.Space(10);
+            GUILayout.Label("Do all the above in One-click, aka the Lazy Button", style);
+            if (GUILayout.Button("Apply All"))
+            {
+                try
+                {
+                    OnNewAvatar();
+                    _dms.GenerateIKTargets(_useAddMeshRenderers);
+                    _dms.CreateHeadFullBodyBipedIK();
+                    _dms.CreateAimIKs();
+                    //_dms.CreateHandsFullBodyBipedIK();
+                    _dms.CreateHandsLimbIKs();
+                    _dms.CreateStandardIKExecutionOrders();
+                    //_dms.standardIKSet.gameObject.SetActive(false);
+                    _dms.AddVRCPrefab(_controllerPrefab);
+                    EditorUtility.DisplayDialog("Complete", "good job you", "OK");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    EditorUtility.DisplayDialog("Error", "Review console", "OK");
+                }
+
+            }
+        }
+    }
+}
+
