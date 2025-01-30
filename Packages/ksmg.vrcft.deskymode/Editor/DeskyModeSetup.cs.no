@@ -6,7 +6,6 @@ using VRC.SDK3.Avatars.Components;
 using VRC.SDK3.Dynamics.Constraint.Components;
 using System.Reflection;
 using UnityEditor;
-using static VRC.Dynamics.CollisionShapes;
 
 namespace DeskyMode
 {

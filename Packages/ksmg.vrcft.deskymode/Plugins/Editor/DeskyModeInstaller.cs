@@ -63,7 +63,7 @@ public class DeskyModeInstaller
                 reader.Close();
                 File.Delete(deskyModeInstalledScriptFiles[0]);
                 StreamWriter writer = new StreamWriter(deskyModeInstalledScriptFiles[0]);
-                writer.WriteLine("#define ActualFinalIK");
+                writer.WriteLine("#define ActualFinalIK\n");
                 writer.WriteLine(fileText);
                 writer.Close();
                 AssetDatabase.ImportAsset(deskyModeInstalledScriptFiles[0]);
@@ -94,7 +94,7 @@ public class DeskyModeInstaller
     {
         foreach (var file in files)
         {
-            if (file.EndsWith(".cs"))
+            if (file.EndsWith(".cs") && System.IO.File.Exists(file))
             {
                 File.Delete(file);
             }
@@ -107,7 +107,6 @@ public class DeskyModeInstaller
         // clear out the existing DeskyMode scripts
         RemoveFiles(deskyModeInstalledScriptFiles);
         // make new ones by forcing a refresh
-        new DeskyModeInstaller();
         AssetDatabase.Refresh();
     }
 }
