@@ -1,6 +1,3 @@
-//#define ActualFinalIK
-// uncomment above if using the actual FinalIK plugin from Rootmotion and not the stub!
-
 using UnityEngine;
 using RootMotion.FinalIK;
 using RootMotion;
@@ -166,13 +163,15 @@ namespace DeskyMode
             headTargetsOrigin = new GameObject("Head Origin").transform;
             headTargetsOrigin.parent = targetsRoot;
             headTargetsOrigin.position = references.head.position;  
-            headTargetsOrigin.transform.rotation = references.head.rotation;
+            //headTargetsOrigin.transform.rotation = references.head.rotation;
+            headTargetsOrigin.transform.rotation = targetsRoot.transform.rotation;
             headTargetsOrigin.transform.localScale = Vector3.one;
 
             headTargetsOriginConstraint = headTargetsOrigin.gameObject.AddComponent<VRCParentConstraint>();
             headTargetsOriginConstraint.enabled = true;
             headTargetsOriginConstraint.Sources.Add(new VRC.Dynamics.VRCConstraintSource { Weight = 1, SourceTransform = animator.GetBoneTransform(HumanBodyBones.Head) });
-            headTargetsOriginConstraint.RotationAtRest = Vector3.zero;
+            // since not copying head position, might not be zero rotation 
+            //headTargetsOriginConstraint.RotationAtRest = Vector3.zero;
             headTargetsOriginConstraint.Locked = true;
             headTargetsOriginConstraint.ActivateConstraint();
 
@@ -326,11 +325,12 @@ namespace DeskyMode
             leftArmBendTargetOrigin = new GameObject("Left Arm Bend Origin").transform;
             leftArmBendTargetOrigin.parent = targetsRoot.transform;
             leftArmBendTargetOrigin.position = references.leftForearm.position;
-            leftArmBendTargetOrigin.rotation = references.leftForearm.rotation;
+            //leftArmBendTargetOrigin.rotation = references.leftForearm.rotation;
+            leftArmBendTargetOrigin.rotation = targetsRoot.transform.rotation;
             leftArmBendTargetOrigin.localScale = Vector3.one;
             leftArmBendTarget = new GameObject("Left Arm Bend Target").transform;
             leftArmBendTarget.parent = leftArmBendTargetOrigin.transform;
-            leftArmBendTarget.localPosition = new Vector3(0, 0, 0.01f * (_reasonableOffset / _avatarScale));
+            leftArmBendTarget.localPosition = new Vector3(0, 0, -0.01f * (_reasonableOffset / _avatarScale));
             leftArmBendTarget.rotation = leftArmBendTargetOrigin.rotation;
             leftArmBendTarget.localScale = Vector3.one;
 
@@ -346,11 +346,12 @@ namespace DeskyMode
             rightArmBendTargetOrigin = new GameObject("Right Arm Bend Origin").transform;
             rightArmBendTargetOrigin.parent = targetsRoot.transform;
             rightArmBendTargetOrigin.position = references.rightForearm.position;
-            rightArmBendTargetOrigin.rotation = references.rightForearm.rotation;
+            //rightArmBendTargetOrigin.rotation = references.rightForearm.rotation;
+            rightArmBendTargetOrigin.rotation = targetsRoot.transform.rotation;
             rightArmBendTargetOrigin.localScale = Vector3.one;
             rightArmBendTarget = new GameObject("Right Arm Bend Target").transform;
             rightArmBendTarget.parent = rightArmBendTargetOrigin.transform;
-            rightArmBendTarget.localPosition = new Vector3(0, 0, 0.01f * (_reasonableOffset / _avatarScale));
+            rightArmBendTarget.localPosition = new Vector3(0, 0, -0.01f * (_reasonableOffset / _avatarScale));
             rightArmBendTarget.rotation = rightArmBendTargetOrigin.rotation;
             rightArmBendTarget.localScale = Vector3.one;
 
