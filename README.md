@@ -22,8 +22,9 @@ Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)]
    - Alternatively, you can use the actual [Final IK](https://assetstore.unity.com/packages/tools/animation/final-ik-14290) from RootMotion ($$$). This will require a (simple) modifcation[^1] to a DeskyMode script. **YOU DO NOT NEED FINAL IK TO USE DESKYMODE**. The stub works perfectly fine for VRC. 
 3. Add DeskyMode to your project
    - Download the latest `.unitypackage` from the Releases tab and import it into your project
+   - Download the Package zip, unzip it, and add the package via [Unity Editor's Package manager](https://docs.unity3d.com/2022.3/Documentation/Manual/upm-ui-local.html)
    
-[^1]: Open up the `DeskyModeSetup.cs` file and add `#define ActualFinalIK` as the first line
+[^1]: Open up the `DeskyModeSetup.cs` file and add `#define ActualFinalIK` as the first line. This should be auto-magically done by the package 
 
 ## DeskyMode Instructions
 
@@ -47,12 +48,13 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
 ## TODO
 
  - [ ] Massive code refactor because it's a mess
- - [ ] ~~Workaround the import compilation issue~~ Find another hack for Package distribution
+ - [x] ~~Workaround the import compilation issue~~ Find another hack for Package distribution
  - [ ] Better window UI 
  - [ ] Add settings for control of certain FIK properties
     - [ ] Spine stiffness
-    - [ ] Difference "presets" 
+    - [ ] Different "presets" 
     - [ ] ...
+ - [ ] VCC package? 
   
 ## License
 
