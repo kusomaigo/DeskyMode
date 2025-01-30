@@ -8,8 +8,8 @@ https://github.com/user-attachments/assets/9f5cdbd7-b6ab-40de-b037-7ba2bef53d89
 <details>
 <summary>Stream Usage Example</summary>
 <br>
-   
-[<img src="imgs/tita_stream_clip_preview.jpg">](https://www.twitch.tv/titatitanium/clip/TardyBadPresidentSeemsGood-5QwNH2gC7TGvcA63)
+
+https://github.com/user-attachments/assets/848ec761-f197-428c-b576-34f5eea21680
 </details>
 
 Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)](https://github.com/benaclejames/VRCFaceTracking/pull/248)
@@ -23,7 +23,7 @@ Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)]
 3. Add DeskyMode to your project
    - Download the latest `.unitypackage` from the Releases tab and import it into your project
    
-[^1]: Open up the `DeskyModeSetup.cs` file and uncomment out the first line (`#define ActualFinalIK`)
+[^1]: Open up the `DeskyModeSetup.cs` file and add `#define ActualFinalIK` as the first line
 
 ## DeskyMode Instructions
 
