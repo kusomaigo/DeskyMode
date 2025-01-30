@@ -4,22 +4,32 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 
-//[InitializeOnLoad]
+[InitializeOnLoad]
 public class DeskyModeInstaller
 {
     static string deskyModeInstallLocation = "Assets/Gimmicks/DeskyMode/";
+    static string[] deskyModeInstalledScriptFiles = { string.Concat(deskyModeInstallLocation, "Editor/DeskyModeSetup.cs"),
+                                              string.Concat(deskyModeInstallLocation, "Editor/DeskyModeEditor.cs") };
 
     static DeskyModeInstaller()
     {
-        string[] deskyModeInstalledScriptFiles = { string.Concat(deskyModeInstallLocation, "Editor/DeskyModeSetup.cs"),
-                                              string.Concat(deskyModeInstallLocation, "Editor/DeskyModeEditor.cs") };
+        // thanks FIK stub
         // see if DeskyMode scripts were setup
         bool deskyModeScriptsInLocation = System.IO.File.Exists(deskyModeInstalledScriptFiles[0]) ||
             System.IO.File.Exists(deskyModeInstalledScriptFiles[1]);
-        if (deskyModeScriptsInLocation)
+
+        // see if DeskyMode exists in current context
+        bool deskyModePresent = AppDomain.CurrentDomain.GetAssemblies()
+            .Any(x => x.GetTypes().Any(y => y.FullName == "DeskyMode.DeskyModeSetup"));
+
+        if (deskyModePresent)
         {
-            // clear out the existing DeskyMode scripts
-            RemoveFiles(deskyModeInstalledScriptFiles);
+            if (!deskyModeScriptsInLocation)
+            {
+                EditorUtility.DisplayDialog("DeskyMode in unexpected location", "Please remove old DeskyMode scripts", "Cancel");
+            }
+            // skip doing anything if stuff in Assets folder seems right
+            return;
         }
         // copied Final IK assembly check from VRLab's FinalIKStubInstaller
         // not foolproof but if you're trying to fool this script... why? 
@@ -94,7 +104,11 @@ public class DeskyModeInstaller
     [MenuItem("Tools/DeskyMode/Refresh Scripts")]
     static void ForceRefresh()
     {
+        // clear out the existing DeskyMode scripts
+        RemoveFiles(deskyModeInstalledScriptFiles);
+        // make new ones by forcing a refresh
         new DeskyModeInstaller();
+        AssetDatabase.Refresh();
     }
 }
 
