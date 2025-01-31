@@ -539,10 +539,15 @@ namespace DeskyMode
             aiks.poleTarget = headAimPoleTarget;
             aiks.poleWeight = 1f;
             // pole target position will be set to poleTarget by FIK
-            // axis and pole axis defaults OK
 
             // the primary transform to aim
             aiks.transform = references.head;
+            // axis and pole axis defaults NOT OK because of avatars like the Novabeast SMH 
+            // use the global rotation of the head Transform as a basis change for the default pole targets
+            // axis is the vector in local transform (head bone) towards the aim target (default: 0,0,1)
+            aiks.axis = references.head.rotation * new Vector3(0, 0, 1);
+            // pole axis is the vector in local transform (head bone) upwards (towards the pole target) (default: 0,1,0)
+            aiks.poleAxis = references.head.rotation * new Vector3(0, 1, 0);
 
             // set transform bone chain to spine chain bones
             // possibility for customization here: only use X-number of the top spine bones? easy customizable weights?
