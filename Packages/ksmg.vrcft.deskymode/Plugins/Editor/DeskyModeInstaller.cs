@@ -11,6 +11,12 @@ public class DeskyModeInstaller
     static string[] deskyModeInstalledScriptFiles = { string.Concat(deskyModeInstallLocation, "Editor/DeskyModeSetup.cs"),
                                               string.Concat(deskyModeInstallLocation, "Editor/DeskyModeEditor.cs") };
 
+    static string thisFilePath = AssetDatabase.FindAssets("DeskyModeInstaller", new[] { "Packages", "Assets" }).Select(AssetDatabase.GUIDToAssetPath).FirstOrDefault();
+    static string thisPackageDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(thisFilePath), "../../"));
+    static string[] deskyModeSourceScriptFiles = { string.Concat(thisPackageDirectory, "Editor/DeskyModeSetup.cs.no"),
+                                              string.Concat(thisPackageDirectory, "Editor/DeskyModeEditor.cs.no") };
+
+    // used for the initial copy
     static DeskyModeInstaller()
     {
         // thanks FIK stub
@@ -44,30 +50,8 @@ public class DeskyModeInstaller
         {
             // copy over the scripts
             // copied again from FIK Stub <3
-            string thisFilePath = AssetDatabase.FindAssets("DeskyModeInstaller", new[] { "Packages", "Assets" }).Select(AssetDatabase.GUIDToAssetPath).FirstOrDefault();
-            string thisPackageDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(thisFilePath), "../../"));
-            string[] deskyModeSourceScriptFiles = { string.Concat(thisPackageDirectory, "Editor/DeskyModeSetup.cs.no"),
-                                              string.Concat(thisPackageDirectory, "Editor/DeskyModeEditor.cs.no") };
             CopyFiles(deskyModeSourceScriptFiles, deskyModeInstallLocation);
-
-            // check if Final IK was installed or the stub
-            // can check by looking for the editor scripts
-            // copied Final IK assembly check from VRLab's FinalIKStubInstaller
-            bool realFIKPresent = AppDomain.CurrentDomain.GetAssemblies()
-                .Any(x => x.GetTypes().Any(y => y.FullName == "RootMotion.FinalIK.IKInspector"));
-            if (realFIKPresent)
-            {
-                // "uncomment" the #define ActualFinalIK in DeskyModeSetup.cs
-                StreamReader reader = new StreamReader(deskyModeInstalledScriptFiles[0]);
-                string fileText = reader.ReadToEnd();
-                reader.Close();
-                File.Delete(deskyModeInstalledScriptFiles[0]);
-                StreamWriter writer = new StreamWriter(deskyModeInstalledScriptFiles[0]);
-                writer.WriteLine("#define ActualFinalIK\n");
-                writer.WriteLine(fileText);
-                writer.Close();
-                AssetDatabase.ImportAsset(deskyModeInstalledScriptFiles[0]);
-            }
+            AssetDatabase.Refresh();
         }
     }
 
@@ -88,6 +72,25 @@ public class DeskyModeInstaller
                 File.Copy(file.Replace(".cs.no", ".cs.meta.no"), finalPath + partialPath.Replace(".cs.no", ".cs.meta"));
             }
         }
+
+        // check if Final IK was installed or the stub
+        // can check by looking for the editor scripts
+        // copied Final IK assembly check from VRLab's FinalIKStubInstaller
+        bool realFIKPresent = AppDomain.CurrentDomain.GetAssemblies()
+            .Any(x => x.GetTypes().Any(y => y.FullName == "RootMotion.FinalIK.IKInspector"));
+        if (realFIKPresent)
+        {
+            // "uncomment" the #define ActualFinalIK in DeskyModeSetup.cs
+            StreamReader reader = new StreamReader(deskyModeInstalledScriptFiles[0]);
+            string fileText = reader.ReadToEnd();
+            reader.Close();
+            //File.Delete(deskyModeInstalledScriptFiles[0]);
+            StreamWriter writer = new StreamWriter(deskyModeInstalledScriptFiles[0], false);
+            writer.WriteLine("#define ActualFinalIK\n");
+            writer.WriteLine(fileText);
+            writer.Close();
+            //AssetDatabase.ImportAsset(deskyModeInstalledScriptFiles[0]);
+        }
     }
 
     private static void RemoveFiles(string[] files)
@@ -97,6 +100,7 @@ public class DeskyModeInstaller
             if (file.EndsWith(".cs") && System.IO.File.Exists(file))
             {
                 File.Delete(file);
+                File.Delete(file.Replace(".cs", ".cs.meta"));
             }
         }
     }
@@ -104,9 +108,11 @@ public class DeskyModeInstaller
     [MenuItem("Tools/DeskyMode/Refresh Scripts")]
     static void ForceRefresh()
     {
-        // clear out the existing DeskyMode scripts
+        // clear out the existing DeskyMode scripts in Assets
         RemoveFiles(deskyModeInstalledScriptFiles);
-        // make new ones by forcing a refresh
+
+        // copy them back in
+        CopyFiles(deskyModeSourceScriptFiles, deskyModeInstallLocation);
         AssetDatabase.Refresh();
     }
 }
