@@ -12,6 +12,7 @@ namespace DeskyMode
     [Serializable]
     public class DeskyModeSetup
     {
+        // default height (size of person): 1.7m  
         public const float STANDARD_HEIGHT = 1.7f;
 
         public BipedReferences references = new BipedReferences();
@@ -94,7 +95,8 @@ namespace DeskyMode
             _armatureScale = animator.GetBoneTransform(HumanBodyBones.Hips).parent.localScale.x;
 
             // set the avatarHeightScale from the given input
-            SetAvatarHeightScale(ref ahs);
+            // since everything under DeskyMode would have been scaled to take into account the avatarHeightScale, need to unscale for "absolute" position
+            SetAvatarHeightScale(ref ahs, avd.ViewPosition.y);
 
             // use VRC's approximated headcollider size for debug element approximate scale
             // these collider scales will be affected by armature (and any subsequent bone) scale, but not avatar scale
@@ -104,23 +106,22 @@ namespace DeskyMode
             return true;
         }
 
-        private bool SetAvatarHeightScale(ref float ahs)
+        private bool SetAvatarHeightScale(ref float ahs, float viewHeight=0)
         {
             float headHeight = Vector3.Distance(animator.GetBoneTransform(HumanBodyBones.Head).position, Vector3.zero);
-            // default height (size of person): 1.7m  
+            if (viewHeight < headHeight) viewHeight = headHeight;
+
+            bool ret = true;
             if (ahs <= 0)
             {
-                ahs = headHeight / STANDARD_HEIGHT;
-                avatarHeightScale = ahs;
-                _reasonableOffset = headHeight / avatarHeightScale;
+                ahs = viewHeight / STANDARD_HEIGHT;
                 // TODO failure message? need to refactor lmao
-                return false;
+                ret = false;
             }
             avatarHeightScale = ahs;
-            // since everything under DeskyMode would have been scaled to take into account the avatarHeightScale, need to unscale for "absolute" position
-            _reasonableOffset = headHeight / avatarHeightScale;
+            _reasonableOffset = viewHeight * 0.8f;
 
-            return true;
+            return ret;
         }
 
         private bool InitializeGimmickRoot()
@@ -545,9 +546,11 @@ namespace DeskyMode
             // axis and pole axis defaults NOT OK because of avatars like the Novabeast SMH 
             // use the global rotation of the head Transform as a basis change for the default pole targets
             // axis is the vector in local transform (head bone) towards the aim target (default: 0,0,1)
-            aiks.axis = references.head.rotation * new Vector3(0, 0, 1);
+            // inverse because we want the vector in the new basis, not to rotate the vector and get the coordinates in the original (global) basis
+            Matrix4x4 coordTransform = Matrix4x4.Rotate(references.head.rotation).inverse;
+            aiks.axis = coordTransform * (deskyModeRoot.rotation * new Vector3(0, 0, 1));
             // pole axis is the vector in local transform (head bone) upwards (towards the pole target) (default: 0,1,0)
-            aiks.poleAxis = references.head.rotation * new Vector3(0, 1, 0);
+            aiks.poleAxis = coordTransform * (deskyModeRoot.rotation * new Vector3(0, 1, 0));
 
             // set transform bone chain to spine chain bones
             // possibility for customization here: only use X-number of the top spine bones? easy customizable weights?
