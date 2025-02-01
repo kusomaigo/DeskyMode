@@ -64,6 +64,11 @@ MonoBehaviour:
     saved: 1
     defaultValue: 0
     networkSynced: 1
+  - name: desky_autotoggle_movement
+    valueType: 2
+    saved: 1
+    defaultValue: 0
+    networkSynced: 1
   - name: rot_only_handlock
     valueType: 2
     saved: 1

@@ -10,47 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
-  m_Name: DeskyMode Menu
+  m_Name: DeskyMode AutoToggle Menu
   m_EditorClassIdentifier: 
-  Parameters: {fileID: 11400000, guid: d64d02c29b89e924384a009018f94a02, type: 2}
+  Parameters: {fileID: 11400000, guid: f53aec43e00b8a540875b5d36163a4a9, type: 2}
   controls:
-  - name: Desky Mode
-    icon: {fileID: 0}
-    type: 102
-    parameter:
-      name: desktop_tracking
-    value: 1
-    style: 0
-    subMenu: {fileID: 0}
-    subParameters: []
-    labels: []
-  - name: Visualize Debug
-    icon: {fileID: 0}
-    type: 102
-    parameter:
-      name: debug_vis
-    value: 1
-    style: 0
-    subMenu: {fileID: 0}
-    subParameters: []
-    labels: []
-  - name: Style
-    icon: {fileID: 0}
-    type: 103
-    parameter:
-      name: 
-    value: 1
-    style: 0
-    subMenu: {fileID: 11400000, guid: 5b4c09d6b54ce1449852993469449185, type: 2}
-    subParameters: []
-    labels: []
   - name: Auto Toggle
     icon: {fileID: 0}
-    type: 103
+    type: 102
+    parameter:
+      name: desky_autotoggle
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Auto Toggle with ANY Movement
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: desky_autotoggle_movement
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: i.e. crouching, entering stations, or looking around/walking (ANY movement
+      toggle only)
+    icon: {fileID: 2800000, guid: 9d2ab6ed35af84f40bbe708af5009383, type: 3}
+    type: 101
     parameter:
       name: 
-    value: 0
+    value: 1
     style: 0
-    subMenu: {fileID: 11400000, guid: 1286088dd63b2fe4dae75b53df7bb10c, type: 2}
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Auto Toggle attempts to enable/disable DeskyMode automatically to prevent
+      targets being locked to an old position
+    icon: {fileID: 2800000, guid: 9d2ab6ed35af84f40bbe708af5009383, type: 3}
+    type: 101
+    parameter:
+      name: 
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
     subParameters: []
     labels: []
