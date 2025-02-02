@@ -18,7 +18,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: desky_autotoggle
+      name: dskym/autotoggle
     value: 1
     style: 0
     subMenu: {fileID: 0}
@@ -28,7 +28,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: desky_autotoggle_movement
+      name: dskym/autotoggle_movement
     value: 1
     style: 0
     subMenu: {fileID: 0}

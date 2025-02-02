@@ -18,7 +18,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: override_VRC_IK
+      name: dskym/override_VRC_IK
     value: 1
     style: 0
     subMenu: {fileID: 0}
@@ -28,7 +28,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: rot_only
+      name: dskym/rot_only
     value: 1
     style: 0
     subMenu: {fileID: 0}
@@ -38,7 +38,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: rot_only_upperbody
+      name: dskym/rot_only_upperbody
     value: 1
     style: 0
     subMenu: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: rot_only_handlock
+      name: dskym/rot_only_handlock
     value: 1
     style: 0
     subMenu: {fileID: 0}

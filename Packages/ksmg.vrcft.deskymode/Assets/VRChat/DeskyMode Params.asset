@@ -44,42 +44,42 @@ MonoBehaviour:
     saved: 0
     defaultValue: 0
     networkSynced: 0
-  - name: desktop_tracking
+  - name: dskym/override_VRC_IK
     valueType: 2
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: rot_only
+  - name: dskym/debug_vis
+    valueType: 2
+    saved: 1
+    defaultValue: 0
+    networkSynced: 0
+  - name: dskym/rot_only
     valueType: 2
     saved: 1
     defaultValue: 1
     networkSynced: 0
-  - name: debug_vis
+  - name: dskym/rot_only_handlock
     valueType: 2
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: desky_autotoggle
+  - name: dskym/rot_only_upperbody
     valueType: 2
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: desky_autotoggle_movement
+  - name: dskym/autotoggle
     valueType: 2
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: rot_only_handlock
+  - name: dskym/autotoggle_movement
     valueType: 2
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: rot_only_upperbody
-    valueType: 2
-    saved: 1
-    defaultValue: 0
-    networkSynced: 0
-  - name: override_VRC_IK
+  - name: dskym/override_VRC_IK
     valueType: 2
     saved: 1
     defaultValue: 0
