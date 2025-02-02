@@ -26,12 +26,17 @@ Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)]
    
 [^1]: Open up the `DeskyModeSetup.cs` file and add `#define ActualFinalIK` as the first line. This should be auto-magically done by the package 
 
+## Updating Instructions
+
+1. Import the updated package, or unzip the package zip contents over the original install, or pull this GitHub repo
+2. In your Unity Editor top toolbar: `Tools -> DeskyMode -> Refresh Scripts`
+
 ## DeskyMode Instructions
 
 DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat. 
 
 0. Make sure your *humanoid* avatar is properly set up for VRChat (with a VRCAvatarDescriptor)
-1. Open the DeskyMode tool menu in the top toolbar (Tools -> DeskyMode -> DeskyMode Window)
+1. Open the DeskyMode tool menu in the top toolbar (`Tools -> DeskyMode -> DeskyMode Window`)
 
 ![toolbar](imgs/toolbar.png)
 
