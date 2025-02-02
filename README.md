@@ -39,7 +39,7 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
    - (Optional) Avatar Scale is set automatically based on your avatar's height. You should only set this manually *if the motion of the targets seem too small/large for your avatar*. Generally, you should **not** need to modify this value!
    - (Optional) Check the "Debug" checkbox to see the transforms DeskyMode uses in generating the FIK components (Avatar References and IK Targets)
    - (Optional) Check the "Add Mesh Renderers" checkbox if you would like debug visualizers mesh primitives
-   - The default VRCFury prefab uses the synced parameters asset. Note that it will occupy 54 bits of synced avatar parameters space. You can drop in the other prefab (without the "Sync" suffix) that takes *no* synced parameters, but remote users will only see fixed animations (no DeskyMode movement) if you enter poses via stations or avatar animations. Remote users can still see DeskyMode outside of stations and avatar animations by IK Sync. 
+   - The default VRCFury prefab uses the synced parameters asset. Note that it will occupy 54 bits of synced avatar parameters space. You can drop in the other prefab (without the "Sync" suffix) that takes *no* synced parameters, but remote users will not see DeskyMode movement if you enter poses via stations or avatar animations. Remote users can still see DeskyMode outside of stations and avatar animations by IK Sync (assuming you do not have "Override VRC IK" toggled"). 
 
 ![DeskyMode Window](imgs/dskym_window.png)
 
@@ -55,6 +55,12 @@ DeskyMode can be added to any *humanoid* avatar that has been set up for VRChat.
     - [ ] Different "presets" 
     - [ ] ...
  - [ ] VCC package? 
+
+## Notes
+
+Using Gogoloco will break your avatar for remote users when used in conjunction with DeskyMode if "Override VRC IK" is enabled in DeskyMode. 
+By overriding VRC IK, you lose on avatar IK Sync, thus causing weird remote-only issues with things like Gogoloco (and no synced movement to remote users who don't have your animations shown). 
+Overriding VRC IK is useful to keep your head origin aligned with your mouse cursor (when *standing* only, as this does not apply when crouching/prone).
   
 ## License
 

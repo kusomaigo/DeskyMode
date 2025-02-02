@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parameters: {fileID: 11400000, guid: f53aec43e00b8a540875b5d36163a4a9, type: 2}
   controls:
-  - name: Enable Stepping
+  - name: Override VRC IK
     icon: {fileID: 0}
     type: 102
     parameter:
-      name: enable_stepping
+      name: override_VRC_IK
     value: 1
     style: 0
     subMenu: {fileID: 0}
