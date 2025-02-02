@@ -72,6 +72,9 @@ Part of the delay between the toggle and adjustment is due to what seems like so
 
 Entering GogoLoco poses with "Hand Lock" toggle enabled may sometimes cause the hands to lock in odd positions for remote users. This is because GogoLoco poses are updated by IK Sync, not animation for remote users. 
 Thus, the timing of the pose update for remote users is not always consistent. 
+
+Be wary of avatar optimizers such as [d4rkAvatarOptimizer](https://github.com/d4rkc0d3r/d4rkAvatarOptimizer/tree/main) that can unintentially remove the Final IK components. 
+Since the Final IK components are disabled and *stay* disabled as they're used by IK Execution Order components instead, optimizers like d4rk's will remove the IK components during the build for upload with its default settings!
   
 ## License
 
