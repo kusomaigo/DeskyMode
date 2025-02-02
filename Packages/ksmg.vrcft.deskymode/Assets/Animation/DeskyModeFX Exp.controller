@@ -5241,8 +5241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackingHead: 2
-  trackingLeftHand: 0
-  trackingRightHand: 0
+  trackingLeftHand: 1
+  trackingRightHand: 1
   trackingHip: 0
   trackingLeftFoot: 0
   trackingRightFoot: 0
