@@ -3,7 +3,7 @@
 VTube in VRChat: 
 Unity tool to generate components for head-source, IK-driven avatar motion in desktop VRChat 
 
-https://github.com/user-attachments/assets/9f5cdbd7-b6ab-40de-b037-7ba2bef53d89
+https://github.com/user-attachments/assets/42acdfec-d794-4d9c-a9b7-66f06b7ae274
 
 <details>
 <summary>Stream Usage Example</summary>
@@ -79,7 +79,10 @@ Thus, the timing of the pose update for remote users is not always consistent.
 
 ## Credits
 
-- Avatar video credit: [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
-- [Titatitanium](https://www.twitch.tv/titatitanium) for streaming with early versions
+- [Titatitanium](https://www.twitch.tv/titatitanium) for streaming with early versions and being DeskyMode's #1 sales-gote
 - Azmidi's [OSCmooth](https://github.com/regzo2/OSCmooth)
 - [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for desktop headtracking to be added to VRCFT
+
+- Video credit (Avatar): [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
+- Video credit (World): [Deep Blue by Fins](https://vrchat.com/home/world/wrld_f7a383bc-c925-4696-85c2-2996c0a40112/info)
+- Video credit (Pose Animations): [GoGo Loco by Franada](https://www.gogoloco.net/)
