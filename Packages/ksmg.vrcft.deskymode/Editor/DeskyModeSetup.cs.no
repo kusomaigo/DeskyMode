@@ -148,6 +148,38 @@ namespace DeskyMode
             return true;
         }
 
+        private GameObject GenerateDebugVisObj(Transform parentT, PrimitiveType shape, float scale)
+        {
+            GameObject visObj = GameObject.CreatePrimitive(shape);
+            visObj.name = "Vis";
+            visObj.transform.parent = parentT;
+            visObj.transform.position = parentT.position;
+            visObj.transform.rotation = parentT.rotation;
+            visObj.transform.localScale = Vector3.one * _debugElementSize * scale;
+
+            // delete the default collider that gets generated with CreatePrimitive
+            if (shape == PrimitiveType.Sphere)
+            {
+                UnityEngine.Object.DestroyImmediate(visObj.GetComponent<SphereCollider>());
+            } else if (shape == PrimitiveType.Cube)
+            {
+                UnityEngine.Object.DestroyImmediate(visObj.GetComponent<BoxCollider>());
+            } else if (shape == PrimitiveType.Capsule)
+            {
+                UnityEngine.Object.DestroyImmediate(visObj.GetComponent<CapsuleCollider>());
+            } else
+            {
+                // do nothing atm
+            }
+
+            visObj.GetComponent<Renderer>().material = debugMat;
+
+            // default disabled
+            visObj.SetActive(false);
+
+            return visObj;
+        }
+
         public bool GenerateIKTargets(bool addMeshRenderers=false)
         {
             if (deskyModeRoot == null && !InitializeGimmickRoot()) return false;
@@ -217,32 +249,9 @@ namespace DeskyMode
 
             if (addMeshRenderers)
             {
-                GameObject headPosTargetVis = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                headPosTargetVis.name = "Vis";
-                headPosTargetVis.transform.parent = headPosTarget;
-                headPosTargetVis.transform.position = headPosTarget.position;
-                headPosTargetVis.transform.rotation = headPosTarget.rotation;
-                headPosTargetVis.transform.localScale = Vector3.one * _debugElementSize;
-                UnityEngine.Object.DestroyImmediate(headPosTargetVis.GetComponent<BoxCollider>());
-                GameObject headAimTargetVis = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                headAimTargetVis.name = "Vis";
-                headAimTargetVis.transform.parent = headAimTarget;
-                headAimTargetVis.transform.position = headAimTarget.position;
-                headAimTargetVis.transform.rotation = headAimTarget.rotation;
-                headAimTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.5f;
-                UnityEngine.Object.DestroyImmediate(headAimTargetVis.GetComponent<SphereCollider>());
-                GameObject headAimPoleTargetVis = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                headAimPoleTargetVis.name = "Vis";
-                headAimPoleTargetVis.transform.parent = headAimPoleTarget;
-                headAimPoleTargetVis.transform.position = headAimPoleTarget.position;
-                headAimPoleTargetVis.transform.rotation = headAimPoleTarget.rotation;
-                headAimPoleTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.25f;
-                UnityEngine.Object.DestroyImmediate(headAimPoleTargetVis.GetComponent<SphereCollider>());
-
-                //Material debugMat = AssetDatabase.LoadAssetAtPath<Material>(debugMatPath);
-                headPosTargetVis.GetComponent<Renderer>().material = debugMat;
-                headAimTargetVis.GetComponent <Renderer>().material = debugMat;
-                headAimPoleTargetVis.GetComponent<Renderer>().material = debugMat;
+                GameObject headPosTargetVis = GenerateDebugVisObj(headPosTarget, PrimitiveType.Cube, 1f);
+                GameObject headAimTargetVis = GenerateDebugVisObj(headAimTarget, PrimitiveType.Sphere, 0.5f);
+                GameObject headAimPoleTargetVis = GenerateDebugVisObj(headAimPoleTarget, PrimitiveType.Sphere, 0.25f);
             }
 
             #endregion
@@ -294,27 +303,8 @@ namespace DeskyMode
             // vis for hand
             if (addMeshRenderers)
             {
-                GameObject leftHandTargetVis = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                leftHandTargetVis.name = "Vis";
-                leftHandTargetVis.transform.parent = leftHandTarget;
-                leftHandTargetVis.transform.position = leftHandTarget.position;
-                leftHandTargetVis.transform.rotation = leftHandTarget.rotation;
-                // no scale in parent, so localScale should match to absolute scale if taking into account avatar scale
-                leftHandTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.5f;
-                UnityEngine.Object.DestroyImmediate(leftHandTargetVis.GetComponent<BoxCollider>());
-
-                GameObject rightHandTargetVis = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                rightHandTargetVis.name = "Vis";
-                rightHandTargetVis.transform.parent = rightHandTarget;
-                rightHandTargetVis.transform.position = rightHandTarget.position;
-                rightHandTargetVis.transform.rotation = rightHandTarget.rotation;
-                // no scale in parent, so localScale should match to absolute scale if taking into account avatar scale
-                rightHandTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.5f;
-                UnityEngine.Object.DestroyImmediate(rightHandTargetVis.GetComponent<BoxCollider>());
-
-                //Material debugMat = AssetDatabase.LoadAssetAtPath<Material>(debugMatPath);
-                leftHandTargetVis.GetComponent<Renderer>().material = debugMat;
-                rightHandTargetVis.GetComponent<Renderer>().material = debugMat;
+                GameObject leftHandTargetVis = GenerateDebugVisObj(leftHandTarget, PrimitiveType.Cube, 0.5f);
+                GameObject rightHandTargetVis = GenerateDebugVisObj(rightHandTarget, PrimitiveType.Cube, 0.5f);
             }
 
             #endregion
@@ -365,25 +355,8 @@ namespace DeskyMode
 
             if (addMeshRenderers)
             {
-                GameObject leftArmBendTargetVis = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                leftArmBendTargetVis.name = "Vis";
-                leftArmBendTargetVis.transform.parent = leftArmBendTarget;
-                leftArmBendTargetVis.transform.position = leftArmBendTarget.position;
-                leftArmBendTargetVis.transform.rotation = leftArmBendTarget.rotation;
-                // already removed avatar scale
-                leftArmBendTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.5f;
-                UnityEngine.Object.DestroyImmediate(leftArmBendTargetVis.GetComponent<SphereCollider>());
-
-                GameObject rightArmBendTargetVis = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                rightArmBendTargetVis.name = "Vis";
-                rightArmBendTargetVis.transform.parent = rightArmBendTarget;
-                rightArmBendTargetVis.transform.position = rightArmBendTarget.position;
-                rightArmBendTargetVis.transform.rotation = rightArmBendTarget.rotation;
-                rightArmBendTargetVis.transform.localScale = Vector3.one * _debugElementSize * 0.5f;
-                UnityEngine.Object.DestroyImmediate(rightArmBendTargetVis.GetComponent<SphereCollider>());
-
-                leftArmBendTargetVis.GetComponent<Renderer>().material = debugMat;
-                rightArmBendTargetVis.GetComponent <Renderer>().material = debugMat;
+                GameObject leftArmBendTargetVis = GenerateDebugVisObj(leftArmBendTarget, PrimitiveType.Sphere, 0.5f);
+                GameObject rightArmBendTargetVis = GenerateDebugVisObj(rightArmBendTarget, PrimitiveType.Sphere, 0.5f);
             }
 
             #endregion

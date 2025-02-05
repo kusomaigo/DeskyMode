@@ -385,6 +385,51 @@ namespace DeskyMode
                 }
 
             }
+
+            if (_showDebug)
+            {
+                GUILayout.Space(40);
+                GUILayout.Label("Toggle Visibility of Debug Target Visualization objects", style);
+                if (GUILayout.Button("Show/Hide Debug Vis"))
+                {
+                    try
+                    {
+                        bool originalState = false;
+                        bool foundState = false;
+                        Transform deskyModeRoot = _avDescriptor.transform.Find("DeskyMode");
+                        if (deskyModeRoot != null)
+                        {
+                            // this is not efficient at all
+                            //Transform[] tfs = GameObject.FindObjectsByType<Transform>(findObjectsInactive: FindObjectsInactive.Include, 
+                            //                                                          sortMode: FindObjectsSortMode.None);
+                            Transform[] tfs =
+                            {
+                                deskyModeRoot.Find("IK Targets/Head Origin/Head Position Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Head Origin/Head Position Target/Head Aim Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Head Origin/Head Aim Pole Target Origin/Head Aim Pole Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Left Hand Target Origin/Left Hand Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Right Hand Target Origin/Right Hand Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Left Arm Bend Origin/Left Arm Bend Target/Vis"),
+                                deskyModeRoot.Find("IK Targets/Right Arm Bend Origin/Right Arm Bend Target/Vis"),
+                            };
+                            foreach (Transform t in tfs)
+                            {
+                                if (!foundState)
+                                {
+                                    foundState = true;
+                                    originalState = t.gameObject.activeSelf;
+                                }
+                                t.gameObject.SetActive(!originalState);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                        EditorUtility.DisplayDialog("Error", "Review console", "OK");
+                    }
+                }
+            }
         }
     }
 }
