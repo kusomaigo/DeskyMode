@@ -44,7 +44,7 @@ MonoBehaviour:
     saved: 0
     defaultValue: 0
     networkSynced: 0
-  - name: dskym/override_VRC_IK
+  - name: dskym/desky_enabled
     valueType: 2
     saved: 1
     defaultValue: 0
