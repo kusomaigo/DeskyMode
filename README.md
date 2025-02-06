@@ -19,16 +19,14 @@ Uses proposed head tracking parameters in VRCFaceTracking [(Head Parameters PR)]
 0. Make sure your VRC Avatar Project is up to date 
 1. Add [VRCFury](https://vrcfury.com/download) to your project
 2. Add [VRLabs' Final-IK-Stub](https://github.com/VRLabs/Final-IK-Stub) to your project
-   - Alternatively, you can use the actual [Final IK](https://assetstore.unity.com/packages/tools/animation/final-ik-14290) from RootMotion ($$$). This will require a (simple) modifcation[^1] to a DeskyMode script. **YOU DO NOT NEED FINAL IK TO USE DESKYMODE**. The stub works perfectly fine for VRC. 
+   - Alternatively, you can use the actual [Final IK](https://assetstore.unity.com/packages/tools/animation/final-ik-14290) from RootMotion ($$$). **YOU DO NOT NEED FINAL IK TO USE DESKYMODE**. The stub works perfectly fine for VRC. 
 3. Add DeskyMode to your project
    - Download the latest `.unitypackage` from the Releases tab and import it into your project
    - Download the Package zip, unzip it, and add the package via [Unity Editor's Package manager](https://docs.unity3d.com/2022.3/Documentation/Manual/upm-ui-local.html)
-   
-[^1]: Open up the `DeskyModeSetup.cs` file and add `#define ActualFinalIK` as the first line. This should be auto-magically done by the package 
 
 ## Updating Instructions
 
-1. Import the updated package, or unzip the package zip contents over the original install, or pull this GitHub repo
+1. Import the updated package, or unzip the package zip contents over the original install, or pull this GitHub repo if that's how you downloaded the package
 2. In your Unity Editor top toolbar: `Tools -> DeskyMode -> Refresh Scripts`
 
 ## DeskyMode Instructions
@@ -84,6 +82,7 @@ Since the Final IK components are disabled and *stay* disabled as they're used b
 
 - [Titatitanium](https://www.twitch.tv/titatitanium) for streaming with early versions and being DeskyMode's #1 sales-gote
 - Azmidi's [OSCmooth](https://github.com/regzo2/OSCmooth)
+- [VRLabs](https://vrlabs.dev/) for Final IK Stub
 - [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for desktop headtracking to be added to VRCFT
 
 - Video credit (Avatar): [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
