@@ -84,8 +84,3 @@ MonoBehaviour:
     saved: 1
     defaultValue: 0
     networkSynced: 0
-  - name: dskym/desky_enabled
-    valueType: 2
-    saved: 1
-    defaultValue: 0
-    networkSynced: 1
