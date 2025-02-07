@@ -88,3 +88,8 @@ Since the Final IK components are disabled and *stay* disabled as they're used b
 - Video credit (Avatar): [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
 - Video credit (World): [Deep Blue by Fins](https://vrchat.com/home/world/wrld_f7a383bc-c925-4696-85c2-2996c0a40112/info)
 - Video credit (Pose Animations): [GoGo Loco by Franada](https://www.gogoloco.net/)
+- Icon Credits
+
+   - [Gh0st](https://digitalghostt.carrd.co/) for the white VRCFT icon
+   - [Desktop icon](https://www.flaticon.com/free-icon/desktop_17113391?term=round+desktop&page=1&position=1&origin=search&related_id=17113391) by [marun](https://www.flaticon.com/authors/marun)
+   - [Rotation icon](https://www.flaticon.com/free-icon/360_4352629?term=rotation&page=1&position=4&origin=tag&related_id=4352629) by [Freepik](https://www.flaticon.com/authors/freepik)
