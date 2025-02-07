@@ -25,7 +25,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: Rotation Only
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: c24cc6cfc36065847af7945eee8948fc, type: 3}
     type: 102
     parameter:
       name: dskym/rot_only
@@ -35,7 +35,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: Upper Body Emphasis
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: 011229dd2f6f5f64f8965a08d3434654, type: 3}
     type: 102
     parameter:
       name: dskym/rot_only_upperbody
@@ -45,7 +45,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: 'Hand Lock (Rotation Only) '
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: 5acca5d9b1a37724880f1a1dc1bc54d3, type: 3}
     type: 102
     parameter:
       name: dskym/rot_only_handlock

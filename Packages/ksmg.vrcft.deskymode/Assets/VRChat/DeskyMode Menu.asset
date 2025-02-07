@@ -15,7 +15,7 @@ MonoBehaviour:
   Parameters: {fileID: 11400000, guid: d64d02c29b89e924384a009018f94a02, type: 2}
   controls:
   - name: Desky Mode
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: 05380d6b20192204db847c20c260fb01, type: 3}
     type: 102
     parameter:
       name: dskym/desky_enabled
@@ -25,7 +25,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: Visualize Debug
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: 81b265eec188837408006ee97fcc2dd4, type: 3}
     type: 102
     parameter:
       name: dskym/debug_vis
@@ -35,7 +35,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: Style
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: 011229dd2f6f5f64f8965a08d3434654, type: 3}
     type: 103
     parameter:
       name: 
@@ -45,7 +45,7 @@ MonoBehaviour:
     subParameters: []
     labels: []
   - name: Auto Toggle
-    icon: {fileID: 0}
+    icon: {fileID: 2800000, guid: cc4c13c05f8c4e943885903095b7474a, type: 3}
     type: 103
     parameter:
       name: 

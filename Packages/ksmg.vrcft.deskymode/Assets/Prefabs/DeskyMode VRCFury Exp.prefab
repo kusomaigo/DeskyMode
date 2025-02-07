@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036258925565492851}
   - component: {fileID: 1844660075922366605}
+  - component: {fileID: 3575224333884030611}
   m_Layer: 0
   m_Name: DeskyMode VRCFury Exp
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 3
   unityVersion: 2022.3.22f1
-  vrcfuryVersion: 1.1163.0
+  vrcfuryVersion: 1.1169.0
   somethingIsBroken: 0
   config:
     features: []
@@ -64,7 +65,7 @@ MonoBehaviour:
             version: 1
             fileID: 0
             guid: 
-            id: f3854f2945914904cb96576bb8129c28|Assets/gimmick/DeskyMode/Animation/DeskyModeFX
+            id: f3854f2945914904cb96576bb8129c28|Assets/ksmg.vrcft.deskymode/Assets/Animation/DeskyModeFX
               Exp.controller
             objRef: {fileID: 9100000, guid: f3854f2945914904cb96576bb8129c28, type: 2}
           type: 5
@@ -73,7 +74,7 @@ MonoBehaviour:
             version: 1
             fileID: 0
             guid: 
-            id: dbbaca9812eb24d429bd5c63b1af6c1b|Assets/gimmick/DeskyMode/VRChat/DeskyMode
+            id: dbbaca9812eb24d429bd5c63b1af6c1b|Assets/ksmg.vrcft.deskymode/Assets/VRChat/DeskyMode
               Menu.asset
             objRef: {fileID: 11400000, guid: dbbaca9812eb24d429bd5c63b1af6c1b, type: 2}
           prefix: Desky Mode
@@ -82,7 +83,7 @@ MonoBehaviour:
             version: 1
             fileID: 0
             guid: 
-            id: f53aec43e00b8a540875b5d36163a4a9|Assets/gimmick/DeskyMode/VRChat/DeskyMode
+            id: f53aec43e00b8a540875b5d36163a4a9|Assets/ksmg.vrcft.deskymode/Assets/VRChat/DeskyMode
               Params.asset
             objRef: {fileID: 11400000, guid: f53aec43e00b8a540875b5d36163a4a9, type: 2}
         smoothedPrms: []
@@ -119,3 +120,37 @@ MonoBehaviour:
         removePrefixes: []
         addPrefix: 
         useSecurityForToggle: 0
+--- !u!114 &3575224333884030611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096318620183902575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e94e501a2d4c95bff3d5601013d923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  unityVersion: 2022.3.22f1
+  vrcfuryVersion: 1.1169.0
+  somethingIsBroken: 0
+  config:
+    features: []
+  content:
+    rid: 5791687570702204928
+  references:
+    version: 2
+    RefIds:
+    - rid: 5791687570702204928
+      type: {class: SetIcon, ns: VF.Model.Feature, asm: VRCFury}
+      data:
+        version: 1
+        path: Desky Mode
+        icon:
+          version: 1
+          fileID: 0
+          guid: 
+          id: 05380d6b20192204db847c20c260fb01|Assets/ksmg.vrcft.deskymode/Assets/VRChat/deskymodeicon.png
+          objRef: {fileID: 2800000, guid: 05380d6b20192204db847c20c260fb01, type: 3}
