@@ -85,9 +85,12 @@ Since the Final IK components are disabled and *stay* disabled as they're used b
 - [VRLabs](https://vrlabs.dev/) for Final IK Stub
 - [VRCFT Discord](https://discord.gg/vrcft) for constantly asking for desktop headtracking to be added to VRCFT
 
-- Video credit (Avatar): [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
-- Video credit (World): [Deep Blue by Fins](https://vrchat.com/home/world/wrld_f7a383bc-c925-4696-85c2-2996c0a40112/info)
-- Video credit (Pose Animations): [GoGo Loco by Franada](https://www.gogoloco.net/)
+- Video Credits
+
+    - Avatar: [Neri by Graelyth](https://graelyth.gumroad.com/l/rqenf)
+    - World: [Deep Blue by Fins](https://vrchat.com/home/world/wrld_f7a383bc-c925-4696-85c2-2996c0a40112/info)
+    - Pose Animations: [GoGo Loco by Franada](https://www.gogoloco.net/)
+
 - Icon Credits
 
    - [Gh0st](https://digitalghostt.carrd.co/) for the white VRCFT icon
